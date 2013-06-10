@@ -13,22 +13,16 @@ bash "install jmeter" do
   cwd #{Chef::Config[:file_cache_path]}
   code <<-EOC
     rm -f apache-jmeter-#{node['jmeter']['version']}
-    curl -skOL node['jmeter']['url']
+    curl -skOL #{node['jmeter']['url']}
     rm -rf apache-jmeter-#{node['jmeter']['version']}
-    gzip -dc apache-jmeter-#{node['jmeter']['version']} | tar xf -
+    gzip -dc apache-jmeter-#{node['jmeter']['version']}.tgz | tar xf -
     mv apache-jmeter-#{node['jmeter']['version']} #{node['jmeter']['root']}
   EOC
-  creates "#node['jmeter']['root']/apache-jmeter-#{node['jmeter']['version']}/bin/jmeter"
+  creates "#{node['jmeter']['root']}/apache-jmeter-#{node['jmeter']['version']}/bin/jmeter"
 end
 
 link "#{node['jmeter']['root']}/apache-jmeter" do
   to "apache-jmeter-#{node['jmeter']['version']}"
-end
-
-template "/etc/init.d/ktserver" do
-  owner "root"
-  group "root"
-  mode 0755
 end
 
 template "/etc/profile.d/jmeter.sh" do
