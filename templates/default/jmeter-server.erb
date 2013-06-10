@@ -29,7 +29,7 @@ start() {
 
     # Start daemon.
     echo -n $"Starting $prog: "
-    <%= node['jmeter']['root'] %>/apache-jmeter/bin/$prog &
+    nohup <%= node['jmeter']['root'] %>/apache-jmeter/bin/$prog &
     RETVAL=$?
     echo
     [ $RETVAL -eq 0 ] && touch $lockfile
