@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: jmeter
-# Recipe:: default
+# Recipe:: server
 #
 # Copyright 2013, YOUR_COMPANY_NAME
 #
